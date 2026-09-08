@@ -14,14 +14,18 @@ public interface EmployeeRepository extends JpaRepository<Employee, Long> {
 
     boolean existsByEmail(String email);
 
-    @Query(value = """
-            SELECT * FROM employee WHERE email = :email
-            """, nativeQuery = true)
+    @Query("""
+            SELECT e
+            FROM Employee e
+            WHERE e.email = :email
+            """)
     Optional<Employee> findEmployeeByEmail(@Param("email") String email);
 
-    @Query(value = """
-            SELECT * FROM employee WHERE email = ?1
-            """, nativeQuery = true)
+    @Query("""
+            SELECT e
+            FROM Employee e
+            WHERE e.email = ?1
+            """)
     Optional<Employee> findEmployeeByEmailPosition(String email);
 
     @Query(value = """
